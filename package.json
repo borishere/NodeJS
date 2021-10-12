@@ -1,0 +1,31 @@
+{
+  "name": "nodejs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "task1": "nodemon --exec babel-node --presets=@babel/preset-env task1.js",
+    "task1.2": "nodemon --exec babel-node --presets=@babel/preset-env task1.2.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/borishere/NodeJS.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/borishere/NodeJS/issues"
+  },
+  "homepage": "https://github.com/borishere/NodeJS#readme",
+  "devDependencies": {
+    "@babel/core": "^7.15.8",
+    "@babel/node": "^7.15.8",
+    "@babel/preset-env": "^7.15.8",
+    "nodemon": "^2.0.13"
+  },
+  "dependencies": {
+    "csvtojson": "^2.0.10"
+  }
+}
