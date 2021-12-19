@@ -14,7 +14,7 @@ export const sequelize = new Sequelize('boris', 'boris', 'mypostgres', {
     timestamps: false
   }
 });
-console.log('TEST');
+
 export const models = {
   User: userModel(sequelize, Sequelize.DataTypes)
 };
