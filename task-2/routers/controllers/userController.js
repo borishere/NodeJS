@@ -2,9 +2,9 @@ import express from 'express';
 import { userService } from '../../services/userService.js';
 import { createUserSchema, updateUserSchema, validator } from '../../models/validator.js';
 
-export const router = express.Router();
+export const userRouter = express.Router();
 
-router.post('/users', createUserSchema, async (req, res) => {
+userRouter.post('/users', createUserSchema, async (req, res) => {
   const userDTO = req.body;
 
   await userService.createUser(userDTO);
