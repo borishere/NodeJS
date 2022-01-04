@@ -1,6 +1,7 @@
 import express from 'express';
 import Sequelize from 'sequelize';
 import dotenv from 'dotenv';
+import cors from 'cors';
 import { auth } from './middleware/auth.js';
 import { infoLogger } from './middleware/logger.js';
 import { createErrorLogger } from './middleware/winstonLogger.js';
@@ -99,6 +100,7 @@ Promise.all([syncUser, syncGroup]).then(() => {
 });
 
 app.use(express.json());
+app.use(cors());
 app.use(auth);
 app.use(infoLogger);
 app.use(userRouter, groupsRouter);
