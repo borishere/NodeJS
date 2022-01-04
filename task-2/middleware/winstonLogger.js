@@ -1,7 +1,7 @@
 import pkg from 'winston';
 const { createLogger, format, transports } = pkg;
 
-export const createWinstonLogger = () => {
+export const createErrorLogger = () => {
   return createLogger({
     level: 'error',
     format: format.combine(

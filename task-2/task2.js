@@ -1,7 +1,7 @@
 import express from 'express';
 import Sequelize from 'sequelize';
-import { logger } from './middleware/logger.js';
-import { createWinstonLogger } from './middleware/winstonLogger.js';
+import { infoLogger } from './middleware/logger.js';
+import { createErrorLogger } from './middleware/winstonLogger.js';
 import { groupModel } from './models/group.js';
 import { userModel } from './models/user.js';
 import { userGroupModel } from './models/userGroup.js';
@@ -10,7 +10,7 @@ import { userRouter } from './routers/controllers/userController.js';
 import { userGroupService } from './services/userGroupService.js';
 const { QueryTypes } = Sequelize;
 
-const winstonLogger = createWinstonLogger();
+const errorLogger = createErrorLogger();
 
 export const app = express();
 const PORT = 3000;
@@ -94,11 +94,11 @@ Promise.all([syncUser, syncGroup]).then(() => {
 });
 
 app.use(express.json());
-app.use(logger);
+app.use(infoLogger);
 app.use(userRouter, groupsRouter);
 app.use(function(err, req, res, next) {
   if (err) {
-    winstonLogger.error(err);
+    errorLogger.error(err);
     res.status(500).json({ error: err });
   }
 });

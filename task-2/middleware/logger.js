@@ -1,25 +1,19 @@
 import chalk from 'chalk';
 
-export const logger = (req, res, next) => {
+export const infoLogger = (req, res, next) => {
   res.on('finish', function() {
-    console.log(chalk.green(`method: ${req.method}`));
+    console.log(chalk.blue(`method: ${req.method}`));
 
-    if (req.params) {
-      for (const param in req.params) {
-        console.log(chalk.green(`param ${param} : ${req.params[param]}`));
-      }
+    if (Object.keys(req.params).length) {
+      console.log(chalk.blue(`params: ${JSON.stringify(req.params, null, 2)}`));
     }
 
-    if (req.body) {
-      for (const param in req.body) {
-        console.log(chalk.green(`body ${param} : ${req.body[param]}`));
-      }
+    if (Object.keys(req.body).length) {
+      console.log(chalk.blue(`body: ${JSON.stringify(req.body, null, 2)}`));
     }
 
-    if (req.query) {
-      for (const param in req.query) {
-        console.log(chalk.green(`query ${param} : ${req.query[param]}`));
-      }
+    if (Object.keys(req.query).length) {
+      console.log(chalk.blue(`query: ${JSON.stringify(req.query, null, 2)}`));
     }
   });
 

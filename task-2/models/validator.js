@@ -8,7 +8,7 @@ export const createUserSchema = (req, res, next) => {
   const schema = Joi.object({
     login: Joi.string().external(validateLogin).required(),
     password: Joi.string().alphanum().required(),
-    age: Joi.number().ruleset.min(4).max(130).rule({ message: 'User’s age must be between 4 and 130' }).required()
+    age: Joi.number().ruleset.min(4).max(130).rule({ message: 'User\'s age must be between 4 and 130' }).required()
   });
 
   validateUser(req, next, schema);
@@ -17,7 +17,7 @@ export const createUserSchema = (req, res, next) => {
 export const updateUserSchema = Joi.object({
   login: Joi.string(),
   password: Joi.string().alphanum(),
-  age: Joi.number().ruleset.min(4).max(130).rule({ message: 'User’s age must be between 4 and 130' })
+  age: Joi.number().ruleset.min(4).max(130).rule({ message: 'User\'s age must be between 4 and 130' })
 });
 
 const validateLogin = async (login) => {
