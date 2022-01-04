@@ -1,4 +1,5 @@
 import express from 'express';
+import jwt from 'jsonwebtoken';
 import { userService } from '../../services/userService.js';
 import { createUserSchema, updateUserSchema, validator } from '../../models/validator.js';
 import { apiErrorLogger } from '../../middleware/apiErrorLogger.js';
@@ -63,10 +64,30 @@ userRouter.post('/users', createUserSchema, async (req, res, next) => {
       const newUser = await userService.updateUser(userId, userDTO);
 
       if (!newUser) {
-        res.status(404).end();
+        return res.status(404).end();
       }
 
       res.status(200).end();
+    } catch (e) {
+      next(e);
+    }
+  })
+  .post('/users/login', async (req, res, next) => {
+    try {
+      const { login, password } = req.body;
+
+      const user = await userService.getUserByCredentials(login, password);
+
+      if (!user) {
+        return res.status(401).end();
+      }
+
+      res
+        .status(200)
+        .json({
+          token: jwt.sign({ id: user.id }, process.env.JWT_SECRET)
+        })
+        .end();
     } catch (e) {
       next(e);
     }

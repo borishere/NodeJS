@@ -45,6 +45,16 @@ export const userService = {
     return user;
   },
 
+  getUserByCredentials: async (login, password) => {
+    const user = await db.user.getUserByCredentials(login, password);
+
+    if (!user) {
+      return null;
+    }
+
+    return user;
+  },
+
   deleteUser: async (userId) => {
     await db.user.deleteUser(userId);
   },

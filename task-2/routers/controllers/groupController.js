@@ -11,7 +11,6 @@ groupsRouter.post('/groups', async (req, res, next) => {
     await groupService.createGroup(groupDTO);
 
     return res.end();
-
   } catch (e) {
     next(e);
   }
@@ -67,7 +66,7 @@ groupsRouter.post('/groups', async (req, res, next) => {
       const newGroup = await groupService.updateGroup(groupId, groupDTO);
 
       if (!newGroup) {
-        res.status(404).end();
+        return res.status(404).end();
       }
 
       res.status(200).end();

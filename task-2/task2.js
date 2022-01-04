@@ -1,5 +1,7 @@
 import express from 'express';
 import Sequelize from 'sequelize';
+import dotenv from 'dotenv';
+import { auth } from './middleware/auth.js';
 import { infoLogger } from './middleware/logger.js';
 import { createErrorLogger } from './middleware/winstonLogger.js';
 import { groupModel } from './models/group.js';
@@ -8,6 +10,9 @@ import { userGroupModel } from './models/userGroup.js';
 import { groupsRouter } from './routers/controllers/groupController.js';
 import { userRouter } from './routers/controllers/userController.js';
 import { userGroupService } from './services/userGroupService.js';
+
+dotenv.config();
+
 const { QueryTypes } = Sequelize;
 
 const errorLogger = createErrorLogger();
@@ -94,6 +99,7 @@ Promise.all([syncUser, syncGroup]).then(() => {
 });
 
 app.use(express.json());
+app.use(auth);
 app.use(infoLogger);
 app.use(userRouter, groupsRouter);
 app.use(function(err, req, res, next) {
