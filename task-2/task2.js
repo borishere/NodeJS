@@ -21,7 +21,7 @@ const errorLogger = createErrorLogger();
 export const app = express();
 const PORT = 3000;
 
-export const sequelize = new Sequelize('boris', 'boris', 'mypostgres', {
+export const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USERNAME, process.env.DB_PASSWORD, {
   host: 'localhost',
   dialect: 'postgres',
   define: {
