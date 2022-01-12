@@ -22,11 +22,11 @@ export const userService = {
       isdeleted: false
     };
 
-    await db.createUser(newUser);
+    await db.user.createUser(newUser);
   },
 
   getAutoSuggestUsers: async (query) => {
-    const users = await db.getUsers();
+    const users = await db.user.getUsers();
 
     if (!users.length) {
       return [];
@@ -36,7 +36,7 @@ export const userService = {
   },
 
   getUser: async (userId) => {
-    const user = await db.getUser(userId);
+    const user = await db.user.getUser(userId);
 
     if (!user) {
       return null;
@@ -46,17 +46,17 @@ export const userService = {
   },
 
   deleteUser: async (userId) => {
-    await db.deleteUser(userId);
+    await db.user.deleteUser(userId);
   },
 
   updateUser: async (userId, userDTO) => {
-    const foundUser = await db.getUser(userId);
+    const foundUser = await db.user.getUser(userId);
 
     if (!foundUser) {
       return null;
     }
 
-    const user = await db.updateUser(userId, userDTO);
+    const user = await db.user.updateUser(userId, userDTO);
 
     return user;
   }
