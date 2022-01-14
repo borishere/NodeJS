@@ -11,9 +11,15 @@ export const db = {
       return user;
     },
 
-    getUserByLogin: async (login) => {
+    getUserByCredentials: async (login, password) => {
+      const credentials = { login };
+
+      if (password) {
+        credentials.password = password;
+      }
+
       const user = await models.User.findOne({
-        where: { login: login },
+        where: credentials,
         raw: true
       });
 

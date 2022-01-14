@@ -21,7 +21,7 @@ export const updateUserSchema = Joi.object({
 });
 
 const validateLogin = async (login) => {
-  const user = await db.user.getUserByLogin(login);
+  const user = await db.user.getUserByCredentials(login);
 
   if (user) {
     return Promise.reject({ message: 'User already exists' });
