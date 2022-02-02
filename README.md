@@ -1,3 +1,7 @@
-# Test NodeJS project using
+# NodeJS test project
 
--Express JS
+### What's used:
+* ExpressJS
+* PostgreSQL
+* Sequelize
+* Json Web Token
